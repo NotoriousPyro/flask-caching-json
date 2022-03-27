@@ -5,7 +5,7 @@ from flask import Flask
 from flask import jsonify
 from flask import render_template_string
 
-from flask_caching import Cache
+from flask_caching_json import Cache
 
 app = Flask(__name__)
 app.config.from_pyfile("hello.cfg")

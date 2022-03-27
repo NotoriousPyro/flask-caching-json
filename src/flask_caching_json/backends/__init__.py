@@ -1,5 +1,5 @@
 """
-    flask_caching.backends
+    flask_caching_json.backends
     ~~~~~~~~~~~~~~~~~~~~~~
 
     Various caching backends.
@@ -8,16 +8,16 @@
     :copyright: (c) 2010 by Thadeus Burgess.
     :license: BSD, see LICENSE for more details.
 """
-from flask_caching.backends.filesystemcache import FileSystemCache
-from flask_caching.backends.memcache import MemcachedCache
-from flask_caching.backends.memcache import SASLMemcachedCache
-from flask_caching.backends.memcache import SpreadSASLMemcachedCache
-from flask_caching.backends.nullcache import NullCache
-from flask_caching.backends.rediscache import RedisCache
-from flask_caching.backends.rediscache import RedisClusterCache
-from flask_caching.backends.rediscache import RedisSentinelCache
-from flask_caching.backends.simplecache import SimpleCache
-from flask_caching.backends.uwsgicache import UWSGICache
+from flask_caching_json.backends.filesystemcache import FileSystemCache
+from flask_caching_json.backends.memcache import MemcachedCache
+from flask_caching_json.backends.memcache import SASLMemcachedCache
+from flask_caching_json.backends.memcache import SpreadSASLMemcachedCache
+from flask_caching_json.backends.nullcache import NullCache
+from flask_caching_json.backends.rediscache import RedisCache
+from flask_caching_json.backends.rediscache import RedisClusterCache
+from flask_caching_json.backends.rediscache import RedisSentinelCache
+from flask_caching_json.backends.simplecache import SimpleCache
+from flask_caching_json.backends.uwsgicache import UWSGICache
 
 
 __all__ = (

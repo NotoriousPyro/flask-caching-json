@@ -1,14 +1,14 @@
 Flask-Caching
 =============
 
-.. module:: flask_caching
+.. module:: flask_caching_json
    :noindex:
 
 Flask-Caching is an extension to `Flask`_ that adds caching support for
 various backends to any Flask application. By running on top of `cachelib`_
 it supports all of `werkzeug`_'s original caching backends through a uniformed
 API. It is also possible to develop your own caching backend by subclassing
-:class:`flask_caching.backends.base.BaseCache` class.
+:class:`flask_caching_json.backends.base.BaseCache` class.
 
 Version support
 ---------------
@@ -30,7 +30,7 @@ Set Up
 Cache is managed through a ``Cache`` instance::
 
     from flask import Flask
-    from flask_caching import Cache
+    from flask_caching_json import Cache
 
     config = {
         "DEBUG": True,          # some Flask specific configs
@@ -225,7 +225,7 @@ Set timeout to ``del`` to delete cached value::
 If keys are provided, you may easily generate the template fragment key and
 delete it from outside of the template context::
 
-    from flask_caching import make_template_fragment_key
+    from flask_caching_json import make_template_fragment_key
     key = make_template_fragment_key("key1", vary_on=["key2", "key3"])
     cache.delete(key)
 
@@ -250,7 +250,7 @@ Here's an example script to empty your application's cache:
 
 .. code-block:: python
 
-    from flask_caching import Cache
+    from flask_caching_json import Cache
 
     from yourapp import app, your_cache_config
 
@@ -313,7 +313,7 @@ The following configuration values exist for Flask-Caching:
                                 function that will return a cache
                                 object that adheres to the cache API.
 
-                                For flask_caching.backends.cache objects, you
+                                For flask_caching_json.backends.cache objects, you
                                 do not need to specify the entire
                                 import string, just one of the following
                                 names.
@@ -355,13 +355,13 @@ The following configuration values exist for Flask-Caching:
                                 methods and binary strings/files. May be
                                 object, import string or predefined
                                 implementation name (``"json"`` or
-                                ``"pickle"``). Defaults to "pickle", but
+                                ``"pickle"``). Defaults to "json", but
                                 pickle module is not secure (CVE-2021-33026).
                                 Consider using another serializer (eg. JSON).
 ``CACHE_SERIALIZER_ERROR``      Deserialization error. May be object,
                                 import string or predefined error name
                                 (``"JSONError"`` or ``"PickleError"``).
-                                Defaults to ``"PickleError"``.
+                                Defaults to ``"JSONError"``.
 ``CACHE_IGNORE_ERRORS``         If set to any errors that occurred during the
                                 deletion process will be ignored. However, if
                                 it is set to ``False`` it will stop on the
@@ -552,7 +552,7 @@ Relevant configuration values
    to memcached backends. To add additional configuration to these caches,
    directly set the configuration options on the object after instantiation::
 
-       from flask_caching import Cache
+       from flask_caching_json import Cache
        cache = Cache()
 
        # Can't configure the client yet...
@@ -623,7 +623,7 @@ UWSGICache
 .. warning::
    ``UWSGICache`` is not maintained nor tested.  Use at your own risk.
 
-Set ``CACHE_TYPE`` to ``flask_caching.contrib.uwsgicache.UWSGICache`` to use
+Set ``CACHE_TYPE`` to ``flask_caching_json.contrib.uwsgicache.UWSGICache`` to use
 this type.  You also have to set ``CACHE_UWSGI_NAME`` to the cache name you
 set in your uWSGI configuration.
 
@@ -634,7 +634,7 @@ Custom Cache Backends
 You are able to easily add your own custom cache backends by exposing a
 function that can instantiate and return a cache object. ``CACHE_TYPE`` will be
 the import string to your custom cache type. If not a subclass of
-:class:`flask_caching.backends.cache.BaseCache`, Flask-Caching will call it
+:class:`flask_caching_json.backends.cache.BaseCache`, Flask-Caching will call it
 with three arguments:
 
 * ``app``, the Flask application object the cache is being initialized for
@@ -647,17 +647,17 @@ with three arguments:
    options (CACHE_ARGS, however, is converted to a list).
 
 Your custom cache should, however, subclass the
-:class:`flask_caching.backends.cache.BaseCache` class so it provides all the
+:class:`flask_caching_json.backends.cache.BaseCache` class so it provides all the
 necessary methods to be usable.
 
 .. versionchanged:: 1.9.1 If your custom cache type *is* a subclass of
-   :class:`flask_caching.backends.cache.BaseCache`, Flask-Caching will, instead
+   :class:`flask_caching_json.backends.cache.BaseCache`, Flask-Caching will, instead
    of directly instantiating the class, call its ``factory`` class method with
    the same args as listed above.  Unless overridden, ``BaseCache.factory``
    simply instantiates the object without passing any arguments to it.
    Built-in cache classes have overridden this to mimic the old, function based
    cache isntantiation, so if you subclassed something that is not
-   :class:`flask_caching.backends.cache.BaseCache`, you may want to consult the
+   :class:`flask_caching_json.backends.cache.BaseCache`, you may want to consult the
    source code to see if your class is still compatible.
 
 An example implementation::

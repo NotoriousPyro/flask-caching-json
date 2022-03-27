@@ -1,5 +1,5 @@
 """
-    flask_caching.backends.rediscache
+    flask_caching_json.backends.rediscache
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     The redis caching backend.
@@ -8,12 +8,11 @@
     :copyright: (c) 2010 by Thadeus Burgess.
     :license: BSD, see LICENSE for more details.
 """
-
 from cachelib import RedisCache as CachelibRedisCache
 
-from flask_caching.backends.base import (
-    BaseCache, extract_serializer_args, iteritems_wrapper
-)
+from flask_caching_json.backends.base import BaseCache
+from flask_caching_json.backends.base import extract_serializer_args
+from flask_caching_json.backends.base import iteritems_wrapper
 
 
 class RedisCache(BaseCache, CachelibRedisCache):
@@ -49,9 +48,7 @@ class RedisCache(BaseCache, CachelibRedisCache):
         **kwargs
     ):
         BaseCache.__init__(
-            self,
-            default_timeout=default_timeout,
-            **extract_serializer_args(kwargs)
+            self, default_timeout=default_timeout, **extract_serializer_args(kwargs)
         )
         CachelibRedisCache.__init__(
             self,

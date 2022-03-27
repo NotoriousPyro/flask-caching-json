@@ -1,5 +1,5 @@
 """
-    flask_caching.backends.uwsgicache
+    flask_caching_json.backends.uwsgicache
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     The uWSGI caching backend.
@@ -10,7 +10,9 @@
 """
 from cachelib import UWSGICache as CachelibUWSGICache
 
-from flask_caching.backends.base import BaseCache, extract_serializer_args
+from flask_caching_json.backends.base import BaseCache
+from flask_caching_json.backends.base import extract_serializer_args
+
 
 class UWSGICache(BaseCache, CachelibUWSGICache):
     """Implements the cache using uWSGI's caching framework.
@@ -28,7 +30,9 @@ class UWSGICache(BaseCache, CachelibUWSGICache):
     """
 
     def __init__(self, default_timeout=300, cache="", **kwargs):
-        BaseCache.__init__(self, default_timeout=default_timeout, **extract_serializer_args(kwargs))
+        BaseCache.__init__(
+            self, default_timeout=default_timeout, **extract_serializer_args(kwargs)
+        )
         CachelibUWSGICache.__init__(
             self,
             cache=cache,

@@ -2,7 +2,7 @@ import datetime
 import json
 import logging
 
-from flask_caching.backends.base import BaseCache
+from flask_caching_json.backends.base import BaseCache
 
 
 logger = logging.getLogger(__name__)

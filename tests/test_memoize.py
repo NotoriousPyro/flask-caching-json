@@ -3,8 +3,8 @@ import time
 
 import pytest
 
-from flask_caching import Cache
-from flask_caching import function_namespace
+from flask_caching_json import Cache
+from flask_caching_json import function_namespace
 
 
 def test_memoize(app, cache):

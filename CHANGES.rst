@@ -32,7 +32,7 @@ Released 2021-03-04
   Instead of passing the name of the initialization function one can now use
   the full path to the caching backend class.
   For example:
-  ``CACHE_TYPE="flask_caching.backends.SimpleCache"``.
+  ``CACHE_TYPE="flask_caching_json.backends.SimpleCache"``.
   In the next major release (2.0), this will be the only supported way.
 - UWSGICache is not officially supported anymore and moved to the user
   contributed backends.
@@ -280,7 +280,7 @@ Released 2016-07-05
   for more information regarding this matter. This also fixes the
   deprecation warning from Flask.
 - Lots of PEP8 and Documentation fixes.
-- Renamed this fork Flask-Caching (``flask_caching``) as it will now be
+- Renamed this fork Flask-Caching (``flask_caching_json``) as it will now be
   available on PyPI for download.
 
 In addition to the above mentioned fixes, following pull requests have been

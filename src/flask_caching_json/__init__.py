@@ -1,5 +1,5 @@
 """
-    flask_caching
+    flask_caching_json
     ~~~~~~~~~~~~~
 
     Adds cache support to your application.
@@ -30,8 +30,8 @@ from flask import url_for
 from markupsafe import Markup
 from werkzeug.utils import import_string
 
-from flask_caching.backends.base import BaseCache
-from flask_caching.backends.simplecache import SimpleCache
+from flask_caching_json.backends.base import BaseCache
+from flask_caching_json.backends.simplecache import SimpleCache
 
 __version__ = "1.10.1"
 
@@ -153,9 +153,7 @@ def make_template_fragment_key(fragment_name: str, vary_on: List[str] = None) ->
 
 
 def load_module(
-    module: Union[str, Any],
-    lookup_obj: Optional[Any] = None,
-    return_back: bool = False
+    module: Union[str, Any], lookup_obj: Optional[Any] = None, return_back: bool = False
 ) -> Any:
     """Dynamic module loading.
 
@@ -260,7 +258,7 @@ class Cache:
         import_me = config["CACHE_TYPE"]
         if "." not in import_me:
             plain_name_used = True
-            import_me = "flask_caching.backends." + import_me
+            import_me = "flask_caching_json.backends." + import_me
         else:
             plain_name_used = False
 
@@ -272,22 +270,20 @@ class Cache:
         cache_options = {
             "default_timeout": config["CACHE_DEFAULT_TIMEOUT"],
             "serializer_impl": load_module(
-                config["CACHE_SERIALIZER"],
-                lookup_obj=serialization,
-                return_back=True
+                config["CACHE_SERIALIZER"], lookup_obj=serialization, return_back=True
             ),
             "serializer_error": load_module(
                 config["CACHE_SERIALIZER_ERROR"],
                 lookup_obj=serialization,
-                return_back=True
-            )
+                return_back=True,
+            ),
         }
 
         if isinstance(cache_factory, type) and issubclass(cache_factory, BaseCache):
             cache_factory = cache_factory.factory
         elif plain_name_used:
             warnings.warn(
-                "Using the initialization functions in flask_caching.backend "
+                "Using the initialization functions in flask_caching_json.backend "
                 "is deprecated.  Use the a full path to backend classes "
                 "directly.",
                 category=DeprecationWarning,
@@ -357,7 +353,7 @@ class Cache:
 
     def cached(
         self,
-        timeout: Optional[int]=None,
+        timeout: Optional[int] = None,
         key_prefix: str = "view/%s",
         unless: Optional[Callable] = None,
         forced_update: Optional[Callable] = None,

@@ -4,7 +4,7 @@ import string
 from flask import render_template
 from flask import render_template_string
 
-from flask_caching import make_template_fragment_key
+from flask_caching_json import make_template_fragment_key
 
 
 def test_jinjaext_cache(app, cache):

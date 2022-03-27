@@ -1,5 +1,5 @@
 """
-    flask_caching.jinja2ext
+    flask_caching_json.jinja2ext
     ~~~~~~~~~~~~~~~~~~~~~~~
 
     Jinja2 extension that adds support for caching template fragments.
@@ -44,7 +44,7 @@
 from jinja2 import nodes
 from jinja2.ext import Extension
 
-from flask_caching import make_template_fragment_key
+from flask_caching_json import make_template_fragment_key
 
 JINJA_CACHE_ATTR_NAME = "_template_fragment_cache"
 

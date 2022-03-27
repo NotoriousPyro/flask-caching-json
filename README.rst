@@ -1,10 +1,12 @@
-Flask-Caching
+Flask-Caching-JSON
 =============
 
-A fork of the `Flask-cache`_ extension which adds easy cache support to Flask.
+A fork of the `Flask-caching`_ extension which is a fork of `Flask-cache`_ extension which adds easy cache support to Flask.
+
+This project defaults to using JSON serialization, whereas Flask-caching defaults to Pickle.
 
 .. _Flask-cache: https://github.com/thadeusb/flask-cache
-
+.. _Flask-caching: https://github.com/pallets-eco/flask-caching
 
 Installing
 ----------
@@ -13,7 +15,7 @@ Install and update using `pip`_:
 
 .. code-block:: text
 
-    $ pip install -U flask-caching
+    $ pip install -U flask-caching-json
 
 .. _pip: https://pip.pypa.io/en/stable/getting-started/
 
@@ -32,10 +34,9 @@ donate today`_.
 Links
 -----
 
+-   Donate: https://palletsprojects.com/donate
 -   Documentation: https://flask-caching.readthedocs.io
--   Changes: https://flask-caching.readthedocs.io/en/latest/changelog.html
--   PyPI Releases: https://pypi.org/project/Flask-Caching/
--   Source Code: https://github.com/pallets-eco/flask-caching
--   Issue Tracker: https://github.com/pallets-eco/flask-caching/issues
--   Twitter: https://twitter.com/PalletsTeam
--   Chat: https://discord.gg/pallets
+-   Changes: https://github.com/NotoriousPyro/flask-caching-json/releases
+-   PyPI Releases: https://pypi.org/project/
+-   Source Code: https://github.com/NotoriousPyro/flask-caching-json
+-   Issue Tracker: https://github.com/NotoriousPyro/flask-caching-json/issues

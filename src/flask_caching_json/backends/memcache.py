@@ -1,5 +1,5 @@
 """
-    flask_caching.backends.memcache
+    flask_caching_json.backends.memcache
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     The memcache caching backend.
@@ -8,12 +8,12 @@
     :copyright: (c) 2010 by Thadeus Burgess.
     :license: BSD, see LICENSE for more details.
 """
-import pickle
 import re
 
 from cachelib import MemcachedCache as CachelibMemcachedCache
 
-from flask_caching.backends.base import BaseCache, extract_serializer_args
+from flask_caching_json.backends.base import BaseCache
+from flask_caching_json.backends.base import extract_serializer_args
 
 _test_memcached_key = re.compile(r"[^\x00-\x21\xff]{1,250}$").match
 
@@ -54,17 +54,9 @@ class MemcachedCache(BaseCache, CachelibMemcachedCache):
                        different prefix.
     """
 
-    def __init__(
-        self,
-        servers=None,
-        default_timeout=300,
-        key_prefix=None,
-        **kwargs
-    ):
+    def __init__(self, servers=None, default_timeout=300, key_prefix=None, **kwargs):
         BaseCache.__init__(
-            self,
-            default_timeout=default_timeout,
-            **extract_serializer_args(kwargs)
+            self, default_timeout=default_timeout, **extract_serializer_args(kwargs)
         )
         CachelibMemcachedCache.__init__(
             self,

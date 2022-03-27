@@ -1,0 +1,35 @@
+name: deploy reusable workflow
+
+on:
+  workflow_call:
+    inputs:
+      pypi_repository_url:
+        required: false
+        type: string
+    secrets:
+      pypi_token:
+        required: true
+
+jobs:
+  deployment:
+    name: Deploy Python packages
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+
+    - name: Build
+      run: |
+        python -m pip install build --user
+        python -m build --sdist --wheel --outdir dist/ .
+
+    - name: Publish package
+      uses: pypa/gh-action-pypi-publish@master
+      with:
+        password: ${{ secrets.pypi_token }}
+        repository_url: ${{ inputs.pypi_repository_url }}

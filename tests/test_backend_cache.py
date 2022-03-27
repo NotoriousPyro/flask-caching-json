@@ -11,7 +11,7 @@ import time
 
 import pytest
 
-from flask_caching import backends
+from flask_caching_json import backends
 
 try:
     import redis
@@ -278,7 +278,9 @@ class TestMemcachedCache(GenericCacheTests):
 
     @pytest.fixture
     def make_cache(self, serialization_args):
-        c = backends.MemcachedCache(key_prefix="werkzeug-test-case:", **serialization_args)
+        c = backends.MemcachedCache(
+            key_prefix="werkzeug-test-case:", **serialization_args
+        )
         yield lambda: c
         c.clear()
 

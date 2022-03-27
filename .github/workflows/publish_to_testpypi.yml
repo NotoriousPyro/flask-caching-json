@@ -1,0 +1,17 @@
+name: Deploy to TestPyPI
+
+on:
+  push:
+    tags: ['v[0-9].[0-9]+.[0-9]+-test']
+
+jobs:
+  deployment:
+    name: Deploy Python packages to TestPyPI
+    environment: development
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: ./.github/workflows/publish.yml@main
+        with:
+          pypi_token: ${{ secrets.PYPI_TOKEN }}
+          pypi_repository_url: https://test.pypi.org/legacy/

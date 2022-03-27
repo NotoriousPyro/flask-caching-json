@@ -2,7 +2,7 @@ from setuptools import setup
 
 # Metadata goes in setup.cfg. These are here for GitHub's dependency graph.
 setup(
-    name="Flask-Caching",
+    name="Flask-Caching-JSON",
     install_requires=["Flask"],
     tests_require=[
         "pytest",

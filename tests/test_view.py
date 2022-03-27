@@ -1,8 +1,11 @@
+import datetime
 import hashlib
 import time
+from datetime import timedelta
 
 import pytest
-from flask import request, Response
+from flask import request
+from flask import Response
 
 
 def test_cached_view(app, cache):
@@ -28,27 +31,32 @@ def test_cached_view(app, cache):
     assert the_time != rv.data.decode("utf-8")
 
 
-@pytest.mark.parametrize('response,mime_type', (
-    ('123', 'text/plain'), ('["1"]', 'application/json'),
-    ('<html></html>', 'text/html'), (b"\x00", 'application/octet-stream'),
-    ('123', None)
-))
-@pytest.mark.parametrize('status', (200, '200 OK', 400, '404 Not Found', None))
-@pytest.mark.parametrize('headers', (
-        None, {'X-Header': '123'}, {'Location': 'http://a.a/', 'ETag': '"abcde123"'}
-))
+@pytest.mark.parametrize(
+    "response,mime_type",
+    (
+        ("123", "text/plain"),
+        ('["1"]', "application/json"),
+        ("<html></html>", "text/html"),
+        (b"\x00", "application/octet-stream"),
+        ("123", None),
+    ),
+)
+@pytest.mark.parametrize("status", (200, "200 OK", 400, "404 Not Found", None))
+@pytest.mark.parametrize(
+    "headers",
+    (None, {"X-Header": "123"}, {"Location": "http://a.a/", "ETag": '"abcde123"'}),
+)
 def test_cached_Response_view(app, cache, response, mime_type, status, headers):
-    @app.route('/')
+    @app.route("/")
     @cache.cached(15)
     def cached_view():
         return Response(
-            response=response, mimetype=mime_type, status=status,
-            headers=headers
+            response=response, mimetype=mime_type, status=status, headers=headers
         )
 
     tc = app.test_client()
     for _ in range(2):
-        rv = tc.get('/')
+        rv = tc.get("/")
 
         if response:
             as_text = isinstance(response, str)
@@ -413,7 +421,7 @@ def test_cache_with_query_string_and_source_check_enabled(app, cache):
 
     @cache.cached(query_string=True, source_check=True)
     def view_works():
-        return str(time.time())
+        return str(datetime.datetime.now())
 
     app.add_url_rule("/works", "works", view_works)
 
@@ -433,7 +441,7 @@ def test_cache_with_query_string_and_source_check_enabled(app, cache):
     # Change the source of the function attached to the view
     @cache.cached(query_string=True, source_check=True)
     def view_works():
-        return str(time.time())
+        return str(datetime.datetime.now() + datetime.timedelta(1))
 
     # ... and we overide the function attached to the view
     app.view_functions["works"] = view_works
@@ -446,12 +454,12 @@ def test_cache_with_query_string_and_source_check_enabled(app, cache):
 
     # Now make sure the time for the first and third
     # responses are not the same i.e. cached is not used!
-    assert third_time[0] != first_time
+    assert third_time != first_time
 
     # Change the source of the function to what it was originally
     @cache.cached(query_string=True, source_check=True)
     def view_works():
-        return str(time.time())
+        return str(datetime.datetime.now())
 
     app.view_functions["works"] = view_works
 

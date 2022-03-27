@@ -1,4 +1,5 @@
 import json as _json
+
 try:
     import cPickle as pickle
 except ImportError:  # pragma: no cover
@@ -7,10 +8,13 @@ except ImportError:  # pragma: no cover
 
 class BytesSerializer:
     """Serializer wrapper with auto str2bytes casting"""
+
     def __init__(self, serializer):
         self._serializer = serializer
 
     def dumps(self, obj, *args, **kwargs):
+        if isinstance(obj, bytes):
+            obj = obj.decode("UTF-8")
         result = self._serializer.dumps(obj, *args, **kwargs)
         if isinstance(result, str):
             return result.encode()

@@ -1,5 +1,5 @@
 """
-    flask_caching.backends.null
+    flask_caching_json.backends.null
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     The null cache backend. A caching backend that doesn't cache.
@@ -8,7 +8,7 @@
     :copyright: (c) 2010 by Thadeus Burgess.
     :license: BSD, see LICENSE for more details.
 """
-from flask_caching.backends.base import BaseCache
+from flask_caching_json.backends.base import BaseCache
 
 
 class NullCache(BaseCache):

@@ -1,5 +1,5 @@
 """
-    flask_caching.backends.simple
+    flask_caching_json.backends.simple
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     The simple cache backend.
@@ -13,7 +13,8 @@ from time import time
 
 from cachelib import SimpleCache as CachelibSimpleCache
 
-from flask_caching.backends.base import BaseCache, extract_serializer_args
+from flask_caching_json.backends.base import BaseCache
+from flask_caching_json.backends.base import extract_serializer_args
 
 
 logger = logging.getLogger(__name__)
@@ -38,16 +39,10 @@ class SimpleCache(BaseCache, CachelibSimpleCache):
     """
 
     def __init__(
-        self,
-        threshold=500,
-        default_timeout=300,
-        ignore_errors=False,
-        **kwargs
+        self, threshold=500, default_timeout=300, ignore_errors=False, **kwargs
     ):
         BaseCache.__init__(
-            self,
-            default_timeout=default_timeout,
-            **extract_serializer_args(kwargs)
+            self, default_timeout=default_timeout, **extract_serializer_args(kwargs)
         )
         CachelibSimpleCache.__init__(
             self, threshold=threshold, default_timeout=default_timeout

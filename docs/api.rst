@@ -7,7 +7,7 @@ The `Configuration <index.html#configuring-flask-caching>`_ section explains
 how the backends can be used.
 
 
-.. module:: flask_caching
+.. module:: flask_caching_json
 
 Cache API
 ---------
@@ -20,12 +20,12 @@ Cache API
 Backends
 --------
 
-.. module:: flask_caching.backends
+.. module:: flask_caching_json.backends
 
 BaseCache
 `````````
 
-.. autoclass:: flask_caching.backends.base.BaseCache
+.. autoclass:: flask_caching_json.backends.base.BaseCache
    :members:
 
 NullCache

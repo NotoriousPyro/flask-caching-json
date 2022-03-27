@@ -4,8 +4,11 @@ import os
 import flask
 import pytest
 
-import flask_caching as fsc
-from flask_caching.serialization import json, JSONError, pickle, PickleError
+import flask_caching_json as fsc
+from flask_caching_json.serialization import json
+from flask_caching_json.serialization import JSONError
+from flask_caching_json.serialization import pickle
+from flask_caching_json.serialization import PickleError
 
 try:
     __import__("pytest_xprocess")
@@ -17,22 +20,26 @@ except ImportError:
         pytest.skip("pytest-xprocess not installed.")
 
 
-@pytest.fixture(params=[
-    {},
-    {'serializer_impl': pickle, 'serializer_error': PickleError},
-    {'serializer_impl': json, 'serializer_error': JSONError}
-])
+@pytest.fixture(
+    params=[
+        {},
+        {"serializer_impl": pickle, "serializer_error": PickleError},
+        {"serializer_impl": json, "serializer_error": JSONError},
+    ]
+)
 def serialization_args(request):
     return request.param.copy()
 
 
-@pytest.fixture(params=[
-    {},
-    {"CACHE_SERIALIZER": "pickle", "CACHE_SERIALIZER_ERROR": "PickleError"},
-    {"CACHE_SERIALIZER": "json", "CACHE_SERIALIZER_ERROR": "JSONError"},
-    {"CACHE_SERIALIZER": pickle, "CACHE_SERIALIZER_ERROR": PickleError},
-    {"CACHE_SERIALIZER": json, "CACHE_SERIALIZER_ERROR": JSONError}
-])
+@pytest.fixture(
+    params=[
+        {},
+        {"CACHE_SERIALIZER": "pickle", "CACHE_SERIALIZER_ERROR": "PickleError"},
+        {"CACHE_SERIALIZER": "json", "CACHE_SERIALIZER_ERROR": "JSONError"},
+        {"CACHE_SERIALIZER": pickle, "CACHE_SERIALIZER_ERROR": PickleError},
+        {"CACHE_SERIALIZER": json, "CACHE_SERIALIZER_ERROR": JSONError},
+    ]
+)
 def app_serialization_args(request):
     return request.param.copy()
 

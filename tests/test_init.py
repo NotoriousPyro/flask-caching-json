@@ -1,15 +1,15 @@
 import pytest
 from flask import Flask
 
-from flask_caching import Cache
-from flask_caching.backends import FileSystemCache
-from flask_caching.backends import MemcachedCache
-from flask_caching.backends import NullCache
-from flask_caching.backends import RedisCache
-from flask_caching.backends import RedisSentinelCache
-from flask_caching.backends import SASLMemcachedCache
-from flask_caching.backends import SimpleCache
-from flask_caching.backends import SpreadSASLMemcachedCache
+from flask_caching_json import Cache
+from flask_caching_json.backends import FileSystemCache
+from flask_caching_json.backends import MemcachedCache
+from flask_caching_json.backends import NullCache
+from flask_caching_json.backends import RedisCache
+from flask_caching_json.backends import RedisSentinelCache
+from flask_caching_json.backends import SASLMemcachedCache
+from flask_caching_json.backends import SimpleCache
+from flask_caching_json.backends import SpreadSASLMemcachedCache
 
 
 @pytest.fixture
@@ -42,7 +42,7 @@ def test_init_nullcache(cache_type, app, tmp_path):
             "CACHE_MEMCACHED_PASSWORD": "test",
         },
     }
-    app.config["CACHE_TYPE"] = "flask_caching.backends." + cache_type.__name__
+    app.config["CACHE_TYPE"] = "flask_caching_json.backends." + cache_type.__name__
     app.config.update(extra_config.get(cache_type, {}))
     cache = Cache(app=app)
 

@@ -1,5 +1,5 @@
 """
-    flask_caching.backends.base
+    flask_caching_json.backends.base
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     This module contains the BaseCache that other caching
@@ -9,10 +9,14 @@
     :copyright: (c) 2010 by Thadeus Burgess.
     :license: BSD, see LICENSE for more details.
 """
+import warnings
+
 from cachelib import BaseCache as CachelibBaseCache
 
-from flask_caching.serialization import pickle, PickleError
-import warnings
+from flask_caching_json.serialization import json
+from flask_caching_json.serialization import pickle
+from flask_caching_json.serialization import PickleError
+
 
 def iteritems_wrapper(mappingorseq):
     """Wrapper for efficient iteration over mappings represented by dicts
@@ -39,7 +43,6 @@ def extract_serializer_args(data):
     return result
 
 
-
 class BaseCache(CachelibBaseCache):
     """Baseclass for the cache systems.  All the cache systems implement this
     API or a superset of it.
@@ -55,15 +58,9 @@ class BaseCache(CachelibBaseCache):
     """
 
     def __init__(
-        self,
-        default_timeout=300,
-        serializer_impl=pickle,
-        serializer_error=PickleError
+        self, default_timeout=300, serializer_impl=json, serializer_error=PickleError
     ):
-        CachelibBaseCache.__init__(
-            self,
-            default_timeout=default_timeout
-        )
+        CachelibBaseCache.__init__(self, default_timeout=default_timeout)
 
         self.default_timeout = default_timeout
         self.ignore_errors = False

@@ -1,5 +1,5 @@
 """
-    flask_caching.backends.filesystem
+    flask_caching_json.backends.filesystem
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     The filesystem caching backend.
@@ -16,7 +16,8 @@ from time import time
 
 from cachelib import FileSystemCache as CachelibFileSystemCache
 
-from flask_caching.backends.base import BaseCache, extract_serializer_args
+from flask_caching_json.backends.base import BaseCache
+from flask_caching_json.backends.base import extract_serializer_args
 
 logger = logging.getLogger(__name__)
 
@@ -57,9 +58,7 @@ class FileSystemCache(BaseCache, CachelibFileSystemCache):
     ):
 
         BaseCache.__init__(
-            self,
-            default_timeout=default_timeout,
-            **extract_serializer_args(kwargs)
+            self, default_timeout=default_timeout, **extract_serializer_args(kwargs)
         )
         CachelibFileSystemCache.__init__(
             self,
