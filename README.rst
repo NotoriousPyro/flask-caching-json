@@ -1,5 +1,5 @@
 Flask-Caching-JSON
-=============
+==================
 
 A fork of the `Flask-caching`_ extension which is a fork of `Flask-cache`_ extension which adds easy cache support to Flask.
 
