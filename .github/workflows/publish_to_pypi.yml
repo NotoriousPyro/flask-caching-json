@@ -7,10 +7,7 @@ on:
 jobs:
   deployment:
     name: Deploy Python packages to PyPI
-    environment: production
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: ./.github/workflows/publish.yml@main
-        with:
-          pypi_token: ${{ secrets.PYPI_TOKEN }}
+    uses: ./.github/workflows/publish.yml@main
+      with:
+        ENVIRONMENT: production
+        pypi_token: ${{ secrets.PYPI_TOKEN }}
