@@ -6,8 +6,8 @@ on:
 
 jobs:
   deployment:
-    name: Deploy Python packages to PyPI
-    uses: ./.github/workflows/publish.yml@main
-      with:
-        ENVIRONMENT: production
-        pypi_token: ${{ secrets.PYPI_TOKEN }}
+    uses: ./.github/workflows/publish.yml
+    with:
+      ENVIRONMENT: production
+    secrets:
+      pypi_token: ${{ secrets.PYPI_TOKEN }}

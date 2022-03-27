@@ -6,9 +6,10 @@ on:
 
 jobs:
   deployment:
-    name: Deploy Python packages to TestPyPI
-    uses: ./.github/workflows/publish.yml@main
-      with:
-        ENVIRONMENT: development
-        pypi_token: ${{ secrets.PYPI_TOKEN }}
-        pypi_repository_url: https://test.pypi.org/legacy/
+    uses: ./.github/workflows/publish.yml
+    with:
+      ENVIRONMENT: development
+      pypi_repository_url: https://test.pypi.org/legacy/
+    secrets:
+      pypi_token: ${{ secrets.PYPI_TOKEN }}
+      
